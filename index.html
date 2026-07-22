@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Superhuman AI — 30-Send Engagement Review</title>
+<style>
+  :root{
+    --ink:#141414;
+    --paper:#faf8f4;
+    --panel:#ffffff;
+    --rule:#e4ded3;
+    --muted:#6f6a60;
+    --accent:#2f6f4f;      /* muted forest, single accent */
+    --accent-soft:#e7efe9;
+    --warn:#b0502f;        /* clay, for cautions only */
+    --warn-soft:#f5e7e0;
+    --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    --mono:"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--sans);line-height:1.55;
+    font-size:17px;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 24px}
+
+  /* Masthead */
+  header.mast{padding:56px 0 28px;border-bottom:2px solid var(--ink)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+  h1{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1.08;margin:0 0 14px;letter-spacing:-.01em}
+  .dek{font-size:18px;color:var(--muted);max-width:60ch;margin:0}
+  .meta{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:22px;display:flex;flex-wrap:wrap;gap:18px}
+  .meta span{white-space:nowrap}
+
+  /* Section headings */
+  section{padding:44px 0;border-bottom:1px solid var(--rule)}
+  .sec-num{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.1em}
+  h2{font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.15;margin:6px 0 18px;letter-spacing:-.01em}
+  h3{font-size:16px;font-weight:700;margin:26px 0 8px;letter-spacing:.005em}
+  p{margin:0 0 15px}
+  .lead{font-size:18px}
+  strong{font-weight:700}
+
+  /* Finding callout */
+  .finding{
+    background:var(--panel);border:1px solid var(--rule);border-left:3px solid var(--accent);
+    padding:18px 20px;margin:20px 0;border-radius:2px;
+  }
+  .finding .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:6px}
+  .finding.caution{border-left-color:var(--warn)}
+  .finding.caution .tag{color:var(--warn)}
+  .finding p:last-child{margin-bottom:0}
+
+  /* Stat row */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:24px 0;border-radius:2px;overflow:hidden}
+  .stat{background:var(--panel);padding:18px 16px}
+  .stat .n{font-family:var(--serif);font-size:32px;font-weight:600;line-height:1;letter-spacing:-.02em}
+  .stat .n.accent{color:var(--accent)}
+  .stat .n.warn{color:var(--warn)}
+  .stat .l{font-size:13px;color:var(--muted);margin-top:7px;line-height:1.35}
+
+  /* Bar chart */
+  .bars{margin:22px 0}
+  .bar-row{display:grid;grid-template-columns:200px 1fr 62px;align-items:center;gap:12px;padding:6px 0}
+  .bar-row .name{font-size:13.5px;text-align:right;color:var(--ink)}
+  .bar-row .name.dim{color:var(--muted)}
+  .bar-track{background:#efe9df;border-radius:2px;height:22px;position:relative;overflow:hidden}
+  .bar-fill{height:100%;background:var(--accent);border-radius:2px}
+  .bar-fill.dim{background:#c3bcae}
+  .bar-fill.warn{background:var(--warn)}
+  .bar-val{font-family:var(--mono);font-size:12.5px;color:var(--muted);text-align:right}
+  @media(max-width:620px){
+    .bar-row{grid-template-columns:120px 1fr 48px;gap:8px}
+    .bar-row .name{font-size:12px}
+  }
+
+  /* Quotes */
+  .quotes{margin:20px 0}
+  blockquote{
+    margin:0 0 12px;padding:12px 16px;background:var(--panel);
+    border:1px solid var(--rule);border-radius:2px;font-family:var(--serif);
+    font-size:16px;line-height:1.45;color:#2a2a2a;position:relative;
+  }
+  blockquote .r{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);display:block;margin-bottom:5px}
+  blockquote .r.pos{color:var(--accent)}
+
+  /* Recommendation list */
+  ol.recs{list-style:none;counter-reset:r;padding:0;margin:18px 0 0}
+  ol.recs li{counter-increment:r;position:relative;padding:14px 0 14px 46px;border-top:1px solid var(--rule)}
+  ol.recs li:before{content:counter(r,decimal-leading-zero);position:absolute;left:0;top:14px;font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:600}
+  ol.recs li b{display:block;margin-bottom:2px}
+  ol.recs li span{color:var(--muted);font-size:15px}
+  .prio{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:2px;margin-left:8px;vertical-align:middle}
+  .prio.high{background:var(--warn-soft);color:var(--warn)}
+  .prio.med{background:var(--accent-soft);color:var(--accent)}
+  .prio.test{background:#efe9df;color:var(--muted)}
+
+  /* Scatter */
+  figure{margin:22px 0}
+  figcaption{font-size:13px;color:var(--muted);margin-top:8px;font-family:var(--sans)}
+  svg{max-width:100%;height:auto;display:block}
+
+  .caveat{font-size:14px;color:var(--muted);font-style:italic;border-top:1px dashed var(--rule);padding-top:14px;margin-top:20px}
+  .method{font-size:13.5px;color:var(--muted)}
+  .method code{font-family:var(--mono);font-size:12px;background:#efe9df;padding:1px 5px;border-radius:3px}
+  footer{padding:40px 0 70px;color:var(--muted);font-size:13px}
+  a{color:var(--accent)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:620px){.two{grid-template-columns:1fr}.stats{grid-template-columns:1fr}h1{font-size:30px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <p class="eyebrow">Editorial Analytics · Internal</p>
+    <h1>What 30 sends and 15,000 clicks say about where the newsletter goes next</h1>
+    <p class="dek">An engagement review of the Superhuman AI daily, built from per-link click data across 30 editions and 640 reader comments, aimed at six questions: length, clutter, section mix, and re-engaging both new and lapsed readers.</p>
+    <div class="meta">
+      <span>30 sends analyzed</span>
+      <span>473k verified clicks</span>
+      <span>640 rated comments</span>
+      <span>594k-recipient open sample</span>
+    </div>
+  </header>
+
+  <!-- THE HEADLINE -->
+  <section>
+    <span class="sec-num">01 / THE HEADLINE</span>
+    <h2>Two sections carry the newsletter. Everything else is a rounding error on clicks.</h2>
+    <p class="lead">Across all 30 sends, <strong>Trending Socials and Editorial Outbound together take 85% of every click.</strong> The rest of the email — resources, course, referral, author socials — competes for the remaining 15%, and most of it lands under 4%.</p>
+
+    <div class="bars" id="sectionBars"></div>
+
+    <p class="caveat">Metric: verified unique email clicks, summed across 30 sends. "Verified" strips bot and prefetch clicks (raw totals overstate low-engagement links by up to 2×). List-management links — unsubscribe, preference, and poll URLs, one per recipient — are excluded from the ranking as infrastructure, not content.</p>
+  </section>
+
+  <!-- LENGTH -->
+  <section>
+    <span class="sec-num">02 / LENGTH</span>
+    <h2>Longer sends earn more total clicks, but each item works less hard.</h2>
+    <p>Editions ranged from <strong>17 to 37 content links</strong> (median 26). The data splits the "is longer worse?" question in two, and the answer is different for each half.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="n accent">+0.41</div><div class="l">Correlation between content links and <em>total</em> clicks. More items, more raw clicks.</div></div>
+      <div class="stat"><div class="n warn">&minus;0.34</div><div class="l">Correlation between content links and clicks <em>per item</em>. More items, thinner attention on each.</div></div>
+      <div class="stat"><div class="n">17&ndash;37</div><div class="l">Content-link range per send. The shortest sends were among the highest per-item performers.</div></div>
+    </div>
+
+    <p>This is diminishing returns, not collapse. Adding a section grows the raw total a little while spreading reader attention thinner across the whole email. The shortest sends in the set — the 17-link "China closes the AI gap" and the 22-link "Apple sues OpenAI" — sit at the <strong>top of per-item engagement</strong> (877 and 939 clicks per content link), well above the 45-link video-editor edition.</p>
+
+    <figure>
+      <svg id="scatter" viewBox="0 0 820 420" role="img" aria-label="Scatter plot of content links versus clicks per link across 30 sends"></svg>
+      <figcaption>Each dot is one edition. As content links rise (left to right), clicks per item trend down (the fitted line slopes down). The cluster of high performers on the left is the case for trimming.</figcaption>
+    </figure>
+
+    <div class="finding">
+      <span class="tag">Takeaway</span>
+      <p>The goal isn't "shorter for its own sake." It's <strong>fewer, better items.</strong> Cutting the weakest 20% of links per send should cost almost no total clicks (they were barely clicked) while lifting attention on what remains. Test a hard cap near the current short end: roughly 22&ndash;26 content links.</p>
+    </div>
+  </section>
+
+  <!-- CLUTTER -->
+  <section>
+    <span class="sec-num">03 / CLUTTER &amp; READABILITY</span>
+    <h2>Readers can't always tell the newsletter from the ads.</h2>
+    <p>The clutter problem isn't only length. It's <strong>signal-to-noise</strong>, and readers name it directly. Sponsor content pulls real clicks (11,180 across 30 sends, 2.4%), but a recurring complaint is that ad density makes the whole email feel like a skim.</p>
+
+    <div class="quotes">
+      <blockquote><span class="r">It was ok</span>It is hard to tell how much of your newsletter is advertising, so I am inclined to do a much much lighter skim.</blockquote>
+      <blockquote><span class="r">It was ok</span>A lot of marketing smoke.</blockquote>
+      <blockquote><span class="r">Terrible</span>It does not fit my computer screen. / Your email is not displaying in its entirety.</blockquote>
+    </div>
+
+    <p>Two separable fixes surface here: <strong>label sponsored content unambiguously</strong> (so trust in the editorial rises rather than bleeding into the ads), and <strong>audit the mobile render</strong> — a handful of readers report the email cutting off, which at scale is silent unsubscribes.</p>
+
+    <div class="finding">
+      <span class="tag">Takeaway</span>
+      <p>Only <strong>1 of 30 sends</strong> had a sponsor link as its single most-clicked item, so ads aren't cannibalizing attention on the numbers. The problem is <em>perceived</em> density. A clear, consistent "Presented by" treatment and one fewer promo block per send buys back trust without costing sponsor revenue.</p>
+    </div>
+  </section>
+
+  <!-- SECTIONS -->
+  <section>
+    <span class="sec-num">04 / SECTION MIX</span>
+    <h2>Keep, fix, cut, test.</h2>
+    <p>What the click and comment data jointly support, held against each section's job in the email.</p>
+
+    <h3>Keep — these are the engine</h3>
+    <p><strong>Trending Socials (43.5%)</strong> and <strong>Editorial news (41.7%)</strong> are the reasons people open. Don't touch the core. But see the caution below on <em>how</em> the socials link out.</p>
+
+    <h3>Fix — loved in theory, ignored in practice</h3>
+    <p>The <strong>Prompts/Tools pack</strong> is the single most-praised content in the comments (72 mentions, the #1 positive theme) yet the click-out to it draws just <strong>1.1% of clicks</strong>. That gap is the biggest opportunity in the email: readers value prompts, but the CTA to the full pack isn't converting. The pack is buried, stale, or both.</p>
+
+    <div class="quotes">
+      <blockquote><span class="r pos">Loved it</span>Super helpful prompts, examples and advice in this issue. Very usable!</blockquote>
+      <blockquote><span class="r">It was ok</span>Tried to delve into the 100 prompts for ChatGPT. Yeah right — dragged through pages…</blockquote>
+    </div>
+
+    <h3>Cut or shrink — near-zero return</h3>
+    <p><strong>Author social links</strong> in the footer drew 448 clicks total across 30 sends (0.1%), averaging under 4 clicks per link. <strong>Advertise-with-us CTA</strong> is similar at 0.1%. These aren't earning their line space in a newsletter fighting length.</p>
+
+    <h3>Test — reader-requested, currently absent</h3>
+    <p>Two experiments the comments openly ask for: a <strong>beginner track or glossary</strong> (acronyms are a named barrier), and a <strong>weekly digest option</strong> for readers who find daily too much. Both target churn directly (see §5).</p>
+
+    <div class="finding caution">
+      <span class="tag">Caution — a fixable revenue-and-trust leak</span>
+      <p>Multiple readers can't use your <strong>X / Twitter links</strong> — X now blocks logged-out viewing on mobile, so a chunk of your audience hits a wall on your single biggest section. One reader: <em>"X posts are not articles. If you say you're linking to an article, link to an article."</em> Where a primary source exists, link the source, not the tweet.</p>
+    </div>
+  </section>
+
+  <!-- OLDER AUDIENCE -->
+  <section>
+    <span class="sec-num">05 / RE-ENGAGING LAPSED &amp; OLDER READERS</span>
+    <h2>The people rating it "Terrible" aren't bored. They're lost.</h2>
+    <p>This is the clearest signal in the comment set, and it runs opposite to the usual "make it punchier" instinct. The dissatisfaction clusters around <strong>technical depth outrunning a large, loyal, non-expert audience</strong> — many of whom self-identify as older or new to AI.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="n">80.2%</div><div class="l">"Loved it" among 640 rated comments. The base is warm.</div></div>
+      <div class="stat"><div class="n warn">6.6%</div><div class="l">"Terrible." Small, but concentrated on one theme: it got too advanced.</div></div>
+      <div class="stat"><div class="n accent">23</div><div class="l">Comments explicitly asking for more beginner-friendly content or flagging acronyms.</div></div>
+    </div>
+
+    <div class="quotes">
+      <blockquote><span class="r">Terrible</span>I'm not smart enough to read this newsletter. I don't understand all the acronyms, and feel like very little of this relates to my small business.</blockquote>
+      <blockquote><span class="r">It was ok</span>The whole article is getting too complicated for my understanding. I'm still back at basic concepts.</blockquote>
+      <blockquote><span class="r pos">Loved it</span>I'm a boomer non-techie, and I really like this newsletter. Thank you for keeping it free.</blockquote>
+    </div>
+
+    <p>The last quote matters as much as the complaints: this audience is <strong>devoted when the newsletter meets them.</strong> They're not asking you to dumb it down across the board. They're asking for <strong>a way in</strong> — defined acronyms on first use, an occasional "basics" explainer, a plain-language line under the dense items.</p>
+
+    <div class="finding">
+      <span class="tag">Takeaway</span>
+      <p>Define every acronym on first use (a house-style rule, near-zero cost). Add a recurring one-line <strong>"in plain terms"</strong> gloss to the densest story. Pilot a beginner-oriented section or a "start here" onboarding email for new subscribers — several first-time readers said they felt "way behind" with no entry point.</p>
+    </div>
+  </section>
+
+  <!-- NEW AUDIENCE + RESOURCES -->
+  <section>
+    <span class="sec-num">06 / NEW READERS, LEAD MAGNETS &amp; RESOURCE UPGRADES</span>
+    <h2>The assets readers value most are the ones converting worst.</h2>
+
+    <div class="two">
+      <div>
+        <h3>The open-rate picture</h3>
+        <p>From a single-send, 594k-recipient deliverability sample, opens by audience type:</p>
+        <div class="bars" id="openBars"></div>
+        <p class="caveat">Consumer webmail is the overwhelming majority of the list and opens at 47.5%. Corporate opens higher (54.9%) on far smaller volume. Directional only — one send.</p>
+      </div>
+      <div>
+        <h3>The resource gap</h3>
+        <p>The prompts pack, tools list, and course are the newsletter's built-in lead magnets. Readers <strong>praise them constantly</strong> yet <strong>click them rarely:</strong></p>
+        <div class="stats" style="grid-template-columns:1fr">
+          <div class="stat"><div class="n warn">1.1%</div><div class="l">Prompts / Tools pack — share of clicks, vs. 72 positive comment mentions.</div></div>
+          <div class="stat"><div class="n warn">0.8%</div><div class="l">Free course — share of clicks, despite being a real value hook.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <span class="tag">Takeaway — upgrade the magnets, don't just relink them</span>
+      <p>The prompts pack draws praise but one reader called navigating it a slog ("dragged through pages"). The value is real; the <strong>delivery is dated.</strong> Rebuild the pack as a searchable, categorized resource (one reader literally asked, "is there a way to search the newsletter's database for articles on a subject?"), refresh the tools list on a schedule, and give the CTA a clearer promise than a bare link. A loved-but-unclicked asset is a conversion problem, not a content problem.</p>
+    </div>
+  </section>
+
+  <!-- ACTION -->
+  <section>
+    <span class="sec-num">07 / WHAT TO DO MONDAY</span>
+    <h2>Ordered by impact over effort.</h2>
+    <ol class="recs">
+      <li><b>Define acronyms on first use, every send <span class="prio high">high · easy</span></b><span>Lowest-cost fix for the single biggest complaint theme. A house-style rule, not a redesign.</span></li>
+      <li><b>Link the source, not the tweet <span class="prio high">high · easy</span></b><span>X blocks logged-out mobile viewing. A real slice of readers hits a dead end on your biggest section. Where a primary source exists, use it.</span></li>
+      <li><b>Cap content links near 22&ndash;26 and cut the weakest 20% <span class="prio med">med · med</span></b><span>Per-item engagement is highest on the shortest sends. Trimming the barely-clicked tail should cost little total reach.</span></li>
+      <li><b>Label sponsored blocks unambiguously; drop one promo per send <span class="prio med">med · easy</span></b><span>Buys back the trust lost to "how much of this is advertising." Only 1 of 30 sends was ad-led, so revenue risk is low.</span></li>
+      <li><b>Rebuild the prompts pack as searchable and categorized <span class="prio med">med · high</span></b><span>Most-praised, least-clicked asset. Fix delivery, not content. Refresh the tools list on a cadence.</span></li>
+      <li><b>Pilot a beginner track + a "start here" onboarding email <span class="prio test">test</span></b><span>New readers report feeling "way behind" with no entry point. Directly targets the churn source in §5.</span></li>
+      <li><b>A/B a weekly digest option <span class="prio test">test</span></b><span>"Daily email is too much. I need a weekly summary." A frequency choice may save readers who'd otherwise unsubscribe.</span></li>
+    </ol>
+  </section>
+
+  <!-- METHOD -->
+  <section>
+    <span class="sec-num">08 / METHOD &amp; LIMITS</span>
+    <h2>What this is built on, and what it can't say.</h2>
+    <p class="method"><strong>Sources.</strong> 30 per-send click exports (verified unique email clicks + CTR, links tagged by <code>utm_campaign</code>); one deliverability export (opens by recipient domain, 594k recipients); 640 deduplicated reader comments with Loved&nbsp;it&nbsp;/&nbsp;OK&nbsp;/&nbsp;Terrible ratings.</p>
+    <p class="method"><strong>Classification.</strong> Links were bucketed by URL structure and UTM signature into Trending Socials, Editorial Outbound, Sponsor Ads, three Resource types, Author Socials, and List Management. Fine-grained editorial splits (Today in AI vs. Prompt Station vs. Tools) are <em>not</em> reliably recoverable from click data alone — the same domains recur across sections and link order doesn't track email position — so editorial is reported as one bucket rather than guessed.</p>
+    <p class="method"><strong>Limits, stated plainly.</strong> Comments carry no send tag, so sentiment is pooled across 30 days, not attributed per edition. The open-rate split is one send and the audience-type mapping is a proxy, so it's directional. Click data measures link engagement, not readership — a section people read and don't click looks weak here, which is why editorial judgment, not clicks alone, drives the "keep" calls. Vocal commenters skew to the delighted and the annoyed; theme <em>direction</em> is trustworthy, exact proportions less so.</p>
+  </section>
+
+  <footer>
+    <p>Prepared for the Superhuman AI editorial team · Analysis of 30 sends and 640 comments · Figures are verified unique email clicks unless noted.</p>
+  </footer>
+
+</div>
+
+<script>
+// ---------- Section bar chart ----------
+const sections=[
+  {name:"Trending Socials",pct:43.5,clicks:"205,941",cls:""},
+  {name:"Editorial Outbound",pct:41.7,clicks:"197,080",cls:""},
+  {name:"List Mgmt / Poll",pct:7.1,clicks:"33,683",cls:"dim"},
+  {name:"Newsletter Self / Web",pct:3.2,clicks:"15,208",cls:"dim"},
+  {name:"Sponsor Ads",pct:2.4,clicks:"11,180",cls:"warn"},
+  {name:"Prompts / Tools Pack",pct:1.1,clicks:"5,310",cls:"warn"},
+  {name:"Free Course",pct:0.8,clicks:"3,824",cls:"warn"},
+  {name:"Author Socials",pct:0.1,clicks:"448",cls:"dim"},
+  {name:"Advertise CTA",pct:0.1,clicks:"439",cls:"dim"}
+];
+const maxPct=43.5;
+document.getElementById("sectionBars").innerHTML=sections.map(s=>{
+  const w=Math.max(1.2,(s.pct/maxPct)*100);
+  const dimName=(s.cls==="dim")?"dim":"";
+  return `<div class="bar-row">
+     <div class="name ${dimName}">${s.name}</div>
+     <div class="bar-track"><div class="bar-fill ${s.cls}" style="width:${w}%"></div></div>
+     <div class="bar-val">${s.pct}%</div>
+   </div>`;
+}).join("");
+
+// ---------- Open-rate bars ----------
+const opens=[
+  {name:"Corporate",v:54.9,sub:"24k sent"},
+  {name:"Consumer webmail",v:47.5,sub:"569k sent"},
+  {name:"Education (.edu)",v:44.7,sub:"0.6k sent"}
+];
+document.getElementById("openBars").innerHTML=opens.map(o=>{
+  const w=(o.v/60)*100;
+  return `<div class="bar-row" style="grid-template-columns:140px 1fr 52px">
+     <div class="name">${o.name}<br><span style="font-size:11px;color:var(--muted)">${o.sub}</span></div>
+     <div class="bar-track"><div class="bar-fill" style="width:${w}%"></div></div>
+     <div class="bar-val">${o.v}%</div>
+   </div>`;
+}).join("");
+
+// ---------- Scatter: content links vs clicks per link ----------
+const data=[{"x":22,"y":619},{"x":25,"y":488},{"x":27,"y":686},{"x":27,"y":459},{"x":27,"y":748},{"x":30,"y":638},{"x":26,"y":565},{"x":22,"y":939},{"x":17,"y":877},{"x":28,"y":497},{"x":25,"y":630},{"x":25,"y":746},{"x":28,"y":585},{"x":24,"y":408},{"x":23,"y":560},{"x":24,"y":435},{"x":21,"y":675},{"x":30,"y":656},{"x":27,"y":578},{"x":28,"y":507},{"x":22,"y":551},{"x":34,"y":463},{"x":27,"y":567},{"x":28,"y":562},{"x":26,"y":650},{"x":24,"y":502},{"x":24,"y":719},{"x":31,"y":525},{"x":27,"y":835},{"x":37,"y":578}];
+(function(){
+  const W=820,H=420,m={t:24,r:24,b:52,l:64};
+  const iw=W-m.l-m.r, ih=H-m.t-m.b;
+  const xmin=15,xmax=39,ymin=380,ymax=960;
+  const sx=v=>m.l+((v-xmin)/(xmax-xmin))*iw;
+  const sy=v=>m.t+ih-((v-ymin)/(ymax-ymin))*ih;
+  let s='';
+  // axes
+  s+=`<line x1="${m.l}" y1="${m.t+ih}" x2="${m.l+iw}" y2="${m.t+ih}" stroke="#141414" stroke-width="1.5"/>`;
+  s+=`<line x1="${m.l}" y1="${m.t}" x2="${m.l}" y2="${m.t+ih}" stroke="#141414" stroke-width="1.5"/>`;
+  // x ticks
+  for(let v=15;v<=39;v+=4){s+=`<line x1="${sx(v)}" y1="${m.t+ih}" x2="${sx(v)}" y2="${m.t+ih+5}" stroke="#141414"/><text x="${sx(v)}" y="${m.t+ih+20}" font-size="12" font-family="monospace" fill="#6f6a60" text-anchor="middle">${v}</text>`;}
+  s+=`<text x="${m.l+iw/2}" y="${H-8}" font-size="12.5" fill="#6f6a60" text-anchor="middle" font-family="sans-serif">Content links per send →</text>`;
+  // y ticks
+  for(let v=400;v<=900;v+=100){s+=`<line x1="${m.l-5}" y1="${sy(v)}" x2="${m.l}" y2="${sy(v)}" stroke="#141414"/><text x="${m.l-10}" y="${sy(v)+4}" font-size="12" font-family="monospace" fill="#6f6a60" text-anchor="end">${v}</text>`;
+    s+=`<line x1="${m.l}" y1="${sy(v)}" x2="${m.l+iw}" y2="${sy(v)}" stroke="#e4ded3" stroke-width="1"/>`;}
+  s+=`<text transform="translate(16,${m.t+ih/2}) rotate(-90)" font-size="12.5" fill="#6f6a60" text-anchor="middle" font-family="sans-serif">Clicks per content link →</text>`;
+  // regression line (least squares)
+  const n=data.length;
+  const mx=data.reduce((a,d)=>a+d.x,0)/n, my=data.reduce((a,d)=>a+d.y,0)/n;
+  let num=0,den=0; data.forEach(d=>{num+=(d.x-mx)*(d.y-my);den+=(d.x-mx)**2;});
+  const b=num/den, a=my-b*mx;
+  s+=`<line x1="${sx(xmin)}" y1="${sy(a+b*xmin)}" x2="${sx(xmax)}" y2="${sy(a+b*xmax)}" stroke="#b0502f" stroke-width="2" stroke-dasharray="6 4"/>`;
+  // points
+  data.forEach(d=>{
+    const hi=(d.x<=23)?'#2f6f4f':'#141414';
+    s+=`<circle cx="${sx(d.x)}" cy="${sy(d.y)}" r="5" fill="${hi}" fill-opacity="0.82"/>`;
+  });
+  s+=`<text x="${m.l+iw-6}" y="${m.t+16}" font-size="11.5" font-family="monospace" fill="#b0502f" text-anchor="end">trend: r = −0.34</text>`;
+  document.getElementById("scatter").innerHTML=s;
+})();
+</script>
+</body>
+</html>
