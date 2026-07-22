@@ -1,0 +1,28 @@
+{
+  "id": "2079993729532989500",
+  "url": "https://x.com/cursor_ai/status/2079993729532989500",
+  "author": {
+    "name": "Cursor",
+    "screen_name": "cursor_ai"
+  },
+  "created_at": "2026-07-22T18:15:24.000Z",
+  "archived_at": "2026-07-22T20:34:37.213Z",
+  "lang": "en",
+  "text": "Introducing Cursor Router, our intelligent model router that selects the right model for the task at hand.\n\nRouter delivers frontier-quality results at 60% lower cost.",
+  "text_html": "Introducing Cursor Router, our intelligent model router that selects the right model for the task at hand.<br>\n<br>\nRouter delivers frontier-quality results at 60% lower cost.",
+  "stats": {
+    "likes": 4643,
+    "replies": 212
+  },
+  "in_reply_to": null,
+  "media": [
+    {
+      "type": "video",
+      "file": "video.mp4",
+      "poster": "poster.jpg",
+      "original": "https://video.twimg.com/amplify_video/2079993297507164160/vid/avc1/1280x720/94JHNIseZJdC0FR6.mp4"
+    }
+  ],
+  "quoted": null,
+  "avatar": "avatar.jpg"
+}
