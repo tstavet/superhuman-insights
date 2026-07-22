@@ -1,0 +1,93 @@
+name: Archive X post
+
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: "X/Twitter post URL(s) — paste one or more, separated by spaces or new lines"
+        required: true
+        type: string
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+# Serialize runs so two archives never race on the same commit
+concurrency:
+  group: archive-x-post
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    # Issue-triggered runs only fire for repo owner/collaborators whose issue
+    # actually contains a status link, so strangers can't add pages.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (
+        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) &&
+        (contains(github.event.issue.title, '/status/') || contains(github.event.issue.body, '/status/'))
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Archive posts
+        id: archive
+        env:
+          INPUT_URLS: ${{ inputs.urls }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          set -o pipefail
+          node scripts/archive-x-post.mjs --text "$INPUT_URLS $ISSUE_TITLE $ISSUE_BODY" | tee archive.log
+          {
+            echo "ids<<EOF"
+            grep '^ARCHIVED ' archive.log | awk '{print $2}'
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add x/
+          if git diff --cached --quiet; then
+            echo "Nothing new to commit."
+            exit 0
+          fi
+          git commit -m "Archive X post(s)"
+          for delay in 2 4 8 16; do
+            if git push origin main; then exit 0; fi
+            git pull --rebase origin main || true
+            sleep "$delay"
+          done
+          git push origin main
+
+      - name: Reply on issue with hosted links
+        if: github.event_name == 'issues'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          IDS: ${{ steps.archive.outputs.ids }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          BASE="https://${{ github.repository_owner }}.github.io/$(basename "${{ github.repository }}")"
+          if [ -z "$IDS" ]; then
+            gh issue comment "$ISSUE" --body "Sorry — no posts could be archived. Check that the links are public X post URLs (\`https://x.com/user/status/...\`) and that the posts still exist."
+            exit 0
+          fi
+          BODY="Archived! Reader-friendly link(s) — no X account needed:"$'\n\n'
+          for id in $IDS; do
+            BODY="$BODY- $BASE/x/$id/"$'\n'
+          done
+          BODY="$BODY"$'\n'"(Pages can take a minute or two to deploy after the commit.)"
+          gh issue comment "$ISSUE" --body "$BODY"
+          gh issue close "$ISSUE" --reason completed

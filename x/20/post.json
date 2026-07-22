@@ -1,0 +1,21 @@
+{
+  "id": "20",
+  "url": "https://x.com/jack/status/20",
+  "author": {
+    "name": "jack",
+    "screen_name": "jack"
+  },
+  "created_at": "2006-03-21T20:50:14.000Z",
+  "archived_at": "2026-07-22T16:32:05.944Z",
+  "lang": "en",
+  "text": "just setting up my twttr",
+  "text_html": "just setting up my twttr",
+  "stats": {
+    "likes": 307549,
+    "replies": 17960
+  },
+  "in_reply_to": null,
+  "media": [],
+  "quoted": null,
+  "avatar": "avatar.jpg"
+}
