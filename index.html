@@ -111,6 +111,33 @@
   a{color:var(--accent)}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
   @media(max-width:620px){.two{grid-template-columns:1fr}.stats{grid-template-columns:1fr}h1{font-size:30px}}
+
+  /* ---- interactive charts ---- */
+  .ic-card{background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:22px 20px;margin:20px 0}
+  .ic-sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+  .ic-toggle{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;margin:0 0 16px}
+  .ic-toggle button{font-family:var(--sans);font-size:13.5px;font-weight:600;padding:8px 15px;border:0;background:var(--panel);color:var(--muted);cursor:pointer;transition:.15s}
+  .ic-toggle button.active{background:var(--accent);color:#fff}
+  .ic-toggle button.active.crit{background:var(--warn)}
+  .ic-toggle button+button{border-left:1px solid var(--rule)}
+  .ic-metricbtns{float:right}
+  .ic-metricbtns button{font-family:var(--mono);font-size:11px;padding:5px 10px;border:1px solid var(--rule);background:var(--panel);color:var(--muted);cursor:pointer;border-radius:4px;margin-left:6px}
+  .ic-metricbtns button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .ic-chart{margin-top:4px}
+  .ic-row{display:grid;grid-template-columns:180px 1fr 78px;align-items:center;gap:12px;padding:7px 0}
+  .ic-row .lab{font-size:13.5px;text-align:right;line-height:1.25}
+  .ic-track{background:#efe9df;border-radius:3px;height:26px;position:relative;overflow:hidden}
+  .ic-fill{height:100%;border-radius:3px;transition:width .5s cubic-bezier(.22,1,.36,1);width:0}
+  .ic-val{font-family:var(--mono);font-size:13px;color:var(--muted);text-align:right}
+  .ic-row:hover .ic-fill{filter:brightness(1.08)}
+  .ic-tip .pop{position:absolute;top:-34px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:12px;font-family:var(--mono);padding:4px 9px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:.12s;z-index:5}
+  .ic-tip:hover .pop{opacity:1}
+  .ic-foot{font-size:13px;color:var(--muted);border-top:1px dashed var(--rule);padding-top:13px;margin-top:16px;font-style:italic}
+  @media(max-width:620px){
+    .ic-row{grid-template-columns:112px 1fr 60px;gap:8px}
+    .ic-row .lab{font-size:11.5px}
+    .ic-metricbtns{float:none;display:block;margin-top:10px}
+  }
 </style>
 </head>
 <body>
@@ -127,6 +154,34 @@
       <span>594k-recipient open sample</span>
     </div>
   </header>
+
+  <!-- INTERACTIVE CHARTS -->
+  <section id="interactive">
+    <span class="sec-num">00 / EXPLORE THE DATA</span>
+    <h2>Interactive charts</h2>
+    <p>Two live views of the raw data. Hover any bar for exact values; use the toggles to switch metric and view.</p>
+
+    <div class="ic-card">
+      <div class="ic-metricbtns" id="metricBtns">
+        <button data-m="pct" class="active">% of clicks</button>
+        <button data-m="clicks">Raw clicks</button>
+      </div>
+      <h3 style="margin-top:0">Most-clicked sections</h3>
+      <p class="ic-sub">Verified unique email clicks, summed across all 30 sends. Excludes unsubscribe and poll infrastructure links.</p>
+      <div class="ic-chart" id="chart1"></div>
+    </div>
+
+    <div class="ic-card">
+      <div class="ic-toggle" id="commentToggle">
+        <button data-v="praise" class="active">&#9650; Most praised</button>
+        <button data-v="critique" class="crit">&#9660; Most critiqued</button>
+      </div>
+      <h3 id="c2title" style="margin-top:0">Top 5 most-praised elements</h3>
+      <p class="ic-sub" id="c2sub">Comments mentioning each theme favorably, across 638 comments with text.</p>
+      <div class="ic-chart" id="chart2"></div>
+      <p class="ic-foot" id="c2foot">Prompts and tools are the most-loved content. Praise is broad across the base.</p>
+    </div>
+  </section>
 
   <!-- THE HEADLINE -->
   <section>
@@ -369,6 +424,45 @@ const data=[{"x":22,"y":619},{"x":25,"y":488},{"x":27,"y":686},{"x":27,"y":459},
   s+=`<text x="${m.l+iw-6}" y="${m.t+16}" font-size="11.5" font-family="monospace" fill="#b0502f" text-anchor="end">trend: r = −0.34</text>`;
   document.getElementById("scatter").innerHTML=s;
 })();
+
+// ---------- Interactive charts (top of page) ----------
+const IC={"chart1":[{"label":"Trending Socials","clicks":205941,"pct":43.5},{"label":"Editorial / News links","clicks":197080,"pct":41.7},{"label":"Newsletter self-links","clicks":15208,"pct":3.2},{"label":"Sponsor ads","clicks":11180,"pct":2.4},{"label":"Prompts / Tools pack","clicks":5310,"pct":1.1},{"label":"Free course","clicks":3824,"pct":0.8},{"label":"Author socials","clicks":448,"pct":0.1},{"label":"Advertise CTA","clicks":439,"pct":0.1}],"praise":[{"label":"Informative / educational","count":109},{"label":"Tools / links / resources","count":106},{"label":"Prompts","count":72},{"label":"Concise / bite-size","count":29},{"label":"Keeps me up to date","count":25}],"critique":[{"label":"Too advanced / acronyms","count":8},{"label":"Too long / too frequent","count":7},{"label":"X / social links unusable","count":6},{"label":"Too much / unclear advertising","count":4},{"label":"Not for casual / non-business","count":4}],"n_comments":638,"n_critical":127};
+const icfmt=n=>n.toLocaleString();
+
+let icMetric="pct";
+function renderIC1(){
+  const rows=IC.chart1, max=Math.max(...rows.map(r=>r[icMetric]));
+  document.getElementById("chart1").innerHTML=rows.map(r=>{
+    const v=r[icMetric], disp=icMetric==="pct"?v+"%":icfmt(v);
+    const pop=icMetric==="pct"?icfmt(r.clicks)+" clicks":r.pct+"% of clicks";
+    let col="#c3bcae";
+    if(r.label.includes("Trending")||r.label.includes("Editorial"))col="var(--accent)";
+    else if(r.label.includes("Sponsor")||r.label.includes("Prompts")||r.label.includes("course"))col="var(--warn)";
+    return `<div class="ic-row"><div class="lab">${r.label}</div><div class="ic-track ic-tip"><div class="ic-fill" style="background:${col}"></div><span class="pop">${pop}</span></div><div class="ic-val">${disp}</div></div>`;
+  }).join("");
+  requestAnimationFrame(()=>document.querySelectorAll("#chart1 .ic-fill").forEach((el,i)=>{el.style.width=Math.max(1.5,(rows[i][icMetric]/max)*100)+"%";}));
+}
+document.querySelectorAll("#metricBtns button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#metricBtns button").forEach(x=>x.classList.remove("active"));b.classList.add("active");icMetric=b.dataset.m;renderIC1();});
+
+let icView="praise";
+function renderIC2(){
+  const rows=IC[icView], max=Math.max(...rows.map(r=>r.count));
+  const col=icView==="praise"?"var(--accent)":"var(--warn)";
+  document.getElementById("chart2").innerHTML=rows.map(r=>`<div class="ic-row"><div class="lab">${r.label}</div><div class="ic-track ic-tip"><div class="ic-fill" style="background:${col}"></div><span class="pop">${r.count} comments</span></div><div class="ic-val">${r.count}</div></div>`).join("");
+  requestAnimationFrame(()=>document.querySelectorAll("#chart2 .ic-fill").forEach((el,i)=>{el.style.width=Math.max(2,(rows[i].count/max)*100)+"%";}));
+  if(icView==="praise"){
+    document.getElementById("c2title").textContent="Top 5 most-praised elements";
+    document.getElementById("c2sub").textContent="Comments mentioning each theme favorably, across "+IC.n_comments+" comments with text.";
+    document.getElementById("c2foot").textContent="Prompts and tools are the most-loved content. Praise is broad across the base.";
+  }else{
+    document.getElementById("c2title").textContent="Top 5 most-critiqued elements";
+    document.getElementById("c2sub").textContent='Complaints counted within the '+IC.n_critical+' "It was ok" and "Terrible" comments only.';
+    document.getElementById("c2foot").textContent="Scale is small: only "+IC.n_critical+" of "+IC.n_comments+" comments were critical, and gripes spread across many themes. Direction is reliable; treat exact counts as soft.";
+  }
+}
+document.querySelectorAll("#commentToggle button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#commentToggle button").forEach(x=>x.classList.remove("active"));b.classList.add("active");icView=b.dataset.v;renderIC2();});
+
+renderIC1();renderIC2();
 </script>
 </body>
 </html>
