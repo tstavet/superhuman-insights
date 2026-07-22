@@ -183,6 +183,32 @@
     </div>
   </section>
 
+  <!-- SECTION-LEVEL BREAKDOWN -->
+  <section id="sections">
+    <span class="sec-num">00b / SECTION-LEVEL CLICKS</span>
+    <h2>The eight named sections, ranked by clicks</h2>
+    <p>Click data alone can't see section headers, so this maps every link back to the live newsletter page it appeared under, then joins that to the click totals. Built from a 10-send sample (84% of clicks matched to a section). Verified unique clicks, summed across those sends.</p>
+
+    <div class="ic-card">
+      <h3 style="margin-top:0">Clicks by newsletter section</h3>
+      <p class="ic-sub">Share of matched clicks across 10 sends. Hover for totals.</p>
+      <div class="ic-chart" id="chartSections"></div>
+      <p class="ic-foot">Trending Socials and Today in AI alone pull 69% of section clicks. The AI Academy, a full tutorial each issue, draws under 2%.</p>
+    </div>
+
+    <div class="finding">
+      <span class="tag">What the split shows</span>
+      <p><strong>The two lead sections carry the email.</strong> Trending Socials (42.6%) and Today in AI (26.8%) are the engine. From the Frontier, ICYMI, and Trending Tools cluster in the 7&ndash;8% range, each pulling its weight for its size. Ads sit at 5.9%.</p>
+    </div>
+
+    <div class="finding caution">
+      <span class="tag">Two sections need a different lens</span>
+      <p><strong>Prompt Station shows zero clicks because it has no links</strong> — the prompts are copy-paste text. It can't be judged by clicks at all, only by comments, where it's the single most-praised feature (72 mentions). Don't read the zero as failure; it's unmeasurable by this method. And <strong>The AI Academy's low 1.6%</strong> is partly structural: some issues run the tutorial as a sponsored placement, so its clicks route through the Ads bucket.</p>
+    </div>
+
+    <p class="caveat">Method note: "The Friday Four" weekly recap is folded into From the Frontier, since it occupies the same structural slot. Sample skews slightly toward recent sends. A link appearing under two sections across different issues is counted under each. Full 30-send processing would tighten these figures but the ranking is stable.</p>
+  </section>
+
   <!-- THE HEADLINE -->
   <section>
     <span class="sec-num">01 / THE HEADLINE</span>
@@ -463,6 +489,26 @@ function renderIC2(){
 document.querySelectorAll("#commentToggle button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#commentToggle button").forEach(x=>x.classList.remove("active"));b.classList.add("active");icView=b.dataset.v;renderIC2();});
 
 renderIC1();renderIC2();
+
+// ---------- Section-level breakdown chart ----------
+const SEC=[{"section":"Trending Socials","clicks":62658,"pct":42.6},{"section":"Today in AI","clicks":39356,"pct":26.8},{"section":"From the Frontier","clicks":12346,"pct":8.4},{"section":"ICYMI","clicks":11123,"pct":7.6},{"section":"Trending Tools","clicks":10565,"pct":7.2},{"section":"Ads","clicks":8635,"pct":5.9},{"section":"The AI Academy","clicks":2305,"pct":1.6},{"section":"Prompt Station","clicks":0,"pct":0,"note":"no outbound links (copy-paste prompts)"}];
+(function(){
+  const max=Math.max(...SEC.map(s=>s.pct));
+  document.getElementById("chartSections").innerHTML=SEC.map(s=>{
+    const w=s.pct===0?0:Math.max(1.5,(s.pct/max)*100);
+    let col="#c3bcae";
+    if(s.section==="Trending Socials"||s.section==="Today in AI")col="var(--accent)";
+    else if(s.section==="Ads")col="var(--warn)";
+    else if(s.section==="Prompt Station")col="#c3bcae";
+    const valTxt=s.pct===0?"n/a":s.pct+"%";
+    const pop=s.pct===0?"no outbound links":s.clicks.toLocaleString()+" clicks";
+    const lab=s.section==="Prompt Station"?s.section+' <span style="color:var(--muted);font-size:11px">(unmeasurable)</span>':s.section;
+    return `<div class="ic-row"><div class="lab">${lab}</div><div class="ic-track ic-tip"><div class="ic-fill" style="background:${col};width:0"></div><span class="pop">${pop}</span></div><div class="ic-val">${valTxt}</div></div>`;
+  }).join("");
+  requestAnimationFrame(()=>document.querySelectorAll("#chartSections .ic-fill").forEach((el,i)=>{
+    const s=SEC[i]; el.style.width=(s.pct===0?0:Math.max(1.5,(s.pct/max)*100))+"%";
+  }));
+})();
 </script>
 </body>
 </html>
