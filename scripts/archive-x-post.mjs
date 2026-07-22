@@ -27,6 +27,7 @@ const SITE_BASE = process.env.SITE_BASE || "https://tstavet.github.io/superhuman
 const SITE_NAME = process.env.SITE_NAME || "Superhuman AI";
 const REPO = process.env.GITHUB_REPOSITORY || "tstavet/superhuman-insights";
 const MAX_VIDEO_BYTES = 80 * 1024 * 1024; // skip download above this; keep poster + link
+const NO_MEDIA = process.env.NO_MEDIA === "1"; // text-only archiving (no downloads)
 
 // ---------------------------------------------------------------- utilities
 
@@ -83,6 +84,7 @@ async function fetchWithRetry(url, opts = {}, tries = 3) {
 }
 
 async function downloadMedia(url, destDir, baseName) {
+  if (NO_MEDIA) return null;
   const res = await fetchWithRetry(url);
   if (!res.ok) throw new Error(`media fetch ${res.status} for ${url}`);
   const len = Number(res.headers.get("content-length") || 0);
